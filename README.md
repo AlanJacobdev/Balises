@@ -27,3 +27,92 @@ Le vidage de mémoire se fait désormais lors de la synchronisation et la collec
 Un boolean permet de verifier si on est en phase de synchronisation ou non.
 
 ## Ajout et amélioration
+
+#### Deplacement sinusoïdale
+
+Pour compléter l'ensemble de déplacement possible lors de collecte de données (horizontal et vertical), nous avons mis en place le déplacement sinusoïdales, permettant la collecte de données sur deux dimensions.
+
+Ainsi la classe DeplSinusoïdal comprends une fonction bouge : 
+```java
+public void bouge(ElementMobile target) { 
+		Point p = target.getPosition(); 
+		int y = p.y; 
+		int x = p.x; 
+		if (monte) { 
+			if(deplDroit) { 
+				y -= 3; 
+				x += 3; 
+			} else { 
+				y -= 3; 
+				x -= 3; 
+			}		 
+			if (y < minY) monte = false; 
+			if (x > maxX) { 
+				deplDroit = false; 
+			} else if (x < minX){ 
+				deplDroit = true; 
+			} 
+		} else { 
+			if(deplDroit) { 
+				y += 3; 
+				x += 3; 
+			} else { 
+				y += 3; 
+				x -= 3; 
+			}		 
+			if (y > maxY) monte = true; 
+			if (x > maxX) { 
+				deplDroit = false; 
+			} else if (x < minX){ 
+				deplDroit = true; 
+			} 
+		} 
+		target.setPosition(new Point(x, y)); 
+	}
+ ```
+---
+
+#### Echange de données
+
+Lorsque la balise attends à la surface et qu'un satellite passe au dessus d'elle (dans un rayon de 10 unités), cette dernière lui trasnmet ses données avant de retourner à sa collecte dans les profondeurs.
+
+Cet échange s'effectue au sein de la méthode whenSatelitteMoved de la classe DeplSynchronisation :
+
+```java
+public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
+		if (this.synchro != null) return;
+		Satellite sat = (Satellite) arg.getSource();
+		int satX = sat.getPosition().x;
+		int tarX = target.getPosition().x;
+		if (satX > tarX - 10 && satX < tarX + 10) {
+			this.synchro = sat;
+			target.send(new SynchroEvent(this));
+			this.synchro.send(new SynchroEvent(this));
+			sat.dataSize += target.dataSize();
+			target.resetData();
+		}
+}
+```
+
+
+***Echange impossible***
+
+Lorsque la mémoire d'un satellite se retrouve pleine, ce dernier ne permet plus la synchronisation avec une balise. Ainsi une balise cherchera à se synchroniser avec un autre satellite.
+
+---
+
+#### Collecte de données
+
+Ainsi, la collecte s'effectue maintenant seulement lors de son déplacement habituel.
+
+Un boolean est passé à vrai quand la mémoire de la balise est pleine, et devient faux quand cette dernière à fini sa descente.
+
+Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et d'accumuler des données à chaque unité de temps.
+
+
+
+
+
+
+
+
