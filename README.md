@@ -115,6 +115,20 @@ Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et 
 Les satellites ainsi que les balises possèdent une barre permettant de constater l'évolution de leur collecte de données.
 On peut constater graphiquement le remplissage ainsi que la synchronisation des balises avec les satellites. Ceci permet de comprendre pourquoi des satellites n'accepte plus les synchronisation ou bien pourquoi les balises remontent.
 
+#### Balises
+
+[!gif]
+
+#### Satellites
+
+[!gif]
+
+### Bateau de ramassage
+
+Le bateau d'étude vient ramasser les balises une fois que l'ensemble des stockages de données satellites soit remplis. Il ramasse les balises quand elle remonte à la surface pour ne pas perdre les données récupérer.
+
+
+
 
 
 
