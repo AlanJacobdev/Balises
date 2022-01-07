@@ -151,7 +151,7 @@ public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 
 Lorsque la mémoire d'un satellite se retrouve pleine, ce dernier ne permet plus la synchronisation avec une balise. Ainsi une balise cherchera à se synchroniser avec un autre satellite.
 
-![gif]()
+![gif](echangeImpossible.gif)
 
 ---
 
@@ -163,7 +163,7 @@ Un boolean est passé à vrai quand la mémoire de la balise est pleine, et devi
 
 Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et d'accumuler des données à chaque unité de temps.
 
-![gif]()
+![gif](collecteDonnees.gif)
 
 ---
 
@@ -174,11 +174,11 @@ On peut constater graphiquement le remplissage ainsi que la synchronisation des 
 
 **Balises**
 
-![gif]()
+![gif](baliseBar.gif)
 
 **Satellites**
 
-![gif]()
+![gif](satelliteBar.gif)
 
 ---
 
