@@ -119,7 +119,7 @@ public void bouge(ElementMobile target) {
 	}
  ```
  
- ![gif](/final_61d7f6a1d681830050c8c585_906430.gif)
+ ![gif](/sinuzoide.gif)
  
 ---
 
