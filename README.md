@@ -132,7 +132,7 @@ Le bateau d'étude vient ramasser les balises une fois que l'ensemble des stocka
 
 
 
-<img src="https://c.tenor.com/dIYElE0kJHQAAAAd/wee-ship.gif" width="100">
+<img src="https://c.tenor.com/dIYElE0kJHQAAAAd/wee-ship.gif" width="120">
 
 
 
