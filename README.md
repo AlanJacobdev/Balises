@@ -109,21 +109,24 @@ Un boolean est passé à vrai quand la mémoire de la balise est pleine, et devi
 
 Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et d'accumuler des données à chaque unité de temps.
 
+---
 
-### Barre de visualisation de données
+#### Barre de visualisation de données
 
 Les satellites ainsi que les balises possèdent une barre permettant de constater l'évolution de leur collecte de données.
 On peut constater graphiquement le remplissage ainsi que la synchronisation des balises avec les satellites. Ceci permet de comprendre pourquoi des satellites n'accepte plus les synchronisation ou bien pourquoi les balises remontent.
 
-#### Balises
+**Balises**
 
 [!gif]
 
-#### Satellites
+**Satellites**
 
 [!gif]
 
-### Bateau de ramassage
+---
+
+#### Bateau de ramassage
 
 Le bateau d'étude vient ramasser les balises une fois que l'ensemble des stockages de données satellites soit remplis. Il ramasse les balises quand elle remonte à la surface pour ne pas perdre les données récupérer.
 
