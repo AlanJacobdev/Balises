@@ -330,11 +330,12 @@ public boolean allSatelliteFull() {
 	return false;
 }
 ```
-Maintenant que le bateau se déplace une fois la condition respecter, il faut qu'il ramasse les balises mais seulement celles qui sont en attente de synchronisation (donc remonté à la surface).
-Pour ce faire nous avons créer 2 nouveaux évènements distinct l'un de l'autre car ils n'ont pas la même utilités:
+Maintenant que le bateau se déplace une fois la condition respectée, il faut qu'il ramasse les balises mais seulement celles qui sont en attente de synchronisation (donc remontées à la surface).
+Pour cela, nous avons créé 2 nouveaux évènements distincts l'un de l'autre car ils n'ont pas la même utilité :
 
-Le premier `BateauMoved` et `BateauMoveListener` va être propager quand le bateau va se déplacer. Les objets listener sont les balises, quand les balises vont recevoir cet évènement elle vont faire appel à une méthode dans leur stratégie de déplacement de synchronisation `DeplSynchronisation.java`.
+Le premier `BateauMoved` et `BateauMoveListener` va être propagé quand le bateau va se déplacer. Les objets listener sont les balises, quand les balises vont recevoir cet évènement, elles vont faire appel à une méthode dans leur stratégie de déplacement de synchronisation `DeplSynchronisation.java`.
 Cette méthode va comme pour la synchronisation, vérifier si les deux objets sont dans la même zone :
+
 *Balise.java*
 ```java
 @Override
@@ -359,10 +360,11 @@ public void whenBateauMoved(BateauMoved arg, Balise target) {
 	}
 }
 ```
-On envoie en paramètre de l'évènement la balise qui remplis les conditions pour être ramassé.
+On envoie en paramètre de l'évènement la balise qui remplit les conditions pour être ramassée.
 
-Le second évènement `BalisePickUp` et `BalisePickUpListener` va être propager dans l'exemple au dessus, implémenté par la vue des balises `GrBalise`, c'est grace à ces objets que l'on va pouvoir récupérer leur model et tester si il correspond avec l'argument envoyé via l'évènement.
-Si oui alors la balise est ramasé par le bateau, dans cette simulation nous avons imagé la ramassage par le fait de faire disparraisent visuellement la vue d'une balise en utilisant la méthode `setVisible(false)`:
+Le second évènement `BalisePickUp` et `BalisePickUpListener` va être propagé dans l'exemple au dessus, implémenté par la vue des balises `GrBalise`, c'est grâce à ces objets que l'on va pouvoir récupérer leur model et tester s'il correspond avec l'argument envoyé via l'évènement.
+Si oui alors la balise est ramassée par le bateau, dans cette simulation nous avons imagé la ramassage par le fait de faire disparaître visuellement la vue d'une balise en utilisant la méthode `setVisible(false)`:
+
 *GrBalise.java*
 ```java
 @Override
@@ -377,17 +379,17 @@ public void whenBalisePickedUp(BalisePickUp arg) {
 }
 ```
 
-Le fait de ne pas détruire l'objet fait qu'il est ramasé à chaques fois que le bateau passe dessus, donc pour régler se petit problème nous avons rajouter un flag `pickedUp` dans la classe `Balise` qui indique si oui ou non la balise à déjà été ramassée.
+Le fait de ne pas détruire l'objet fait qu'il est ramassé à chaque fois que le bateau passe dessus, donc pour régler ce petit problème nous avons rajouter un flag `pickedUp` dans la classe `Balise` qui indique si oui ou non la balise à déjà été ramassée.
 
-Pour finir un petit récapitulatif des possibilité rajouter avec le bateau:
-- Évènement du bateau qui enregistre les satellites et qui indique combien on la mémoire pleine.
+Pour finir un petit récapitulatif des possibilités rajoutées avec le bateau:
+- Évènement du bateau qui enregistre les satellites et qui indique combien ont la mémoire pleine.
 - Évènement qui indique quand le bateau se déplace.
 - Évènement qui effectue l'action du ramassage des balises.
 
 - La possibilité pour le bateau de bouger uniquement si tous les satellites ont leurs mémoires pleines.
 - La possibilité pour les balises de détecter si le bateau bouge.
 - La possibilité pour les balises de se mettre en état "ramassé" une fois toutes les conditions remplis 
-	(mémoire remplis, en attente de synchro et le bateau se trouve sur sa position)
+	(mémoire remplit, en attente de synchro et le bateau se trouve sur sa position)
 - La possibilité pour les balises de se cacher visuellement pour simuler leur ramassage par le bateau.
 
 Pour imagé tout ce chapitre, la démonstration ci-dessous montre comment les évènements fonctionnent visuellement:
