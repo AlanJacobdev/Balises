@@ -170,6 +170,7 @@ Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et 
 #### Barre de visualisation de données
 
 Une barre de visualisation de données est avant tout une classe Java `GrBarData` composer de 2 rectangles:
+
 ```java
 public class GrBarData extends GrElementMobile {
 	
@@ -215,7 +216,8 @@ On peut constater graphiquement le remplissage ainsi que la synchronisation des 
 
 ![gif](satelliteBar.gif)
 
-Pour faire ces barres de données, nous avons créer un nouvel évènement `DataChanged` et `DataChangedListener` qui vont être propager au moment ou une balise récolte de la donnée:<br>
+Pour faire ces barres de données, nous avons créer un nouvel évènement `DataChanged` et `DataChangedListener` qui vont être propager au moment ou une balise récolte de la donnée:
+
 *Balise.java*
 ```java
 protected void readSensors() {
@@ -223,7 +225,8 @@ protected void readSensors() {
 	this.send(new DataChanged(this));
 }
 ```
-La classe `GrBalise` implémente donc l'interface `DataChangedListener` et sa méthode pour permettre de modifier graphiquement sa barre de données en lui envoyant sa taille calculer comme un pourcentage:<br>
+La classe `GrBalise` implémente donc l'interface `DataChangedListener` et sa méthode pour permettre de modifier graphiquement sa barre de données en lui envoyant sa taille calculer comme un pourcentage:
+
 *GrBalise.java*
 ```java
 @Override
