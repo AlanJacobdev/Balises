@@ -26,6 +26,27 @@ Le vidage de mémoire se fait désormais lors de la synchronisation et la collec
 
 Un boolean permet de verifier si on est en phase de synchronisation ou non.
 
+```java
+public void tick() {
+		
+		if (!whileSynchro)  {
+				
+			if (this.memoryFull()) {
+			Deplacement redescendre = new Redescendre(this.deplacement(), this.profondeur(), this);
+			Deplacement deplSynchro = new DeplSynchronisation(redescendre);
+			Deplacement nextDepl = new MonteSurfacePourSynchro(deplSynchro);
+			this.setDeplacement(nextDepl);
+			this.setWhileSynchro(true);
+			
+			} else {
+				this.readSensors();
+			}
+		}
+		super.tick();
+		
+	}
+}
+
 ## Ajout et amélioration
 
 #### Deplacement sinusoïdale
