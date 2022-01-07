@@ -24,7 +24,7 @@ Donc, si jamais la remontée était grande et/ou l'attente était longue, dès q
 
 Le vidage de mémoire se fait désormais lors de la synchronisation et la collecte des données ne s'effectue plus lors de la montée et la descente de la balise, et reprends lors de son déplacement normal (à la fin de la redescente *Redescendre.java).
 
-*DeplSynchronisation*
+*DeplSynchronisation.java*
 ```java
 	public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 		if (this.synchro != null) return;
@@ -80,7 +80,7 @@ public void tick() {
 
 Pour compléter l'ensemble de déplacement possible lors de collecte de données (horizontal et vertical), nous avons mis en place le déplacement sinusoïdales, permettant la collecte de données sur deux dimensions.
 
-*DeplSinusoïdal*
+*DeplSinusoïdal.java*
 ```java
 public void bouge(ElementMobile target) { 
 		Point p = target.getPosition(); 
@@ -119,8 +119,6 @@ public void bouge(ElementMobile target) {
 	}
  ```
  
- ![gif]()
- 
 ---
 
 #### Echange de données
@@ -129,7 +127,7 @@ Lorsque la balise attends à la surface et qu'un satellite passe au dessus d'ell
 
 Cet échange s'effectue au sein de la méthode whenSatelitteMoved de la classe DeplSynchronisation :
 
-*DeplSynchronisation*
+*DeplSynchronisation.java*
 ```java
 public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 		if (this.synchro != null) return;
