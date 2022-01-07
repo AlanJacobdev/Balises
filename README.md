@@ -319,4 +319,51 @@ public boolean allSatelliteFull() {
 	return false;
 }
 ```
+Maintenant que le bateau se déplace une fois la condition respecter, il faut qu'il ramasse les balises mais seulement celles qui sont en attente de synchronisation (donc remonté à la surface).
+Pour ce faire nous avons créer 2 nouveaux évènements distinct l'un de l'autre car ils n'ont pas la même utilités:
 
+Le premier `BateauMoved` et `BateauMoveListener` va être propager quand le bateau va se déplacer. Les objets listener sont les balises, quand les balises vont recevoir cet évènement elle vont faire appel à une méthode dans leur stratégie de déplacement de synchronisation `DeplSynchronisation.java`.
+Cette méthode va comme pour la synchronisation, vérifier si les deux objets sont dans la même zone :
+*Balise.java*
+```java
+@Override
+public void whenBateauMoved(BateauMoved arg) {
+	// TODO Auto-generated method stub
+	DeplacementBalise dp = (DeplacementBalise) this.depl;
+	dp.whenBateauMoved(arg, this);
+}
+```
+*DeplSynchronisation.java*
+```java
+@Override
+public void whenBateauMoved(BateauMoved arg, Balise target) {
+	Bateau bateau = (Bateau)arg.getSource();
+	Point positionBalise = target.getPosition();
+	Point positionBateau = bateau.getPosition();
+	if(positionBalise.getX() == positionBateau.getX() + 10) {
+		if(!target.isPickedUp()) {
+			target.sendElementMobile(new BalisePickUp(target));
+			target.setPickedUp(true);
+		}
+	}
+}
+```
+On envoie en paramètre de l'évènement la balise qui remplis les conditions pour être ramassé.
+
+Le second évènement `BalisePickUp` et `BalisePickUpListener` va être propager dans l'exemple au dessus, implémenté par la vue des balises `GrBalise`, c'est grace à ces objets que l'on va pouvoir récupérer leur model et tester si il correspond avec l'argument envoyé via l'évènement.
+Si oui alors la balise est ramasé par le bateau, dans cette simulation nous avons imagé la ramassage par le fait de faire disparraisent visuellement la vue d'une balise en utilisant la méthode `setVisible(false)`:
+*GrBalise.java*
+```java
+@Override
+public void whenBalisePickedUp(BalisePickUp arg) {
+	// TODO Auto-generated method stub
+	Balise balise = (Balise)arg.getSource();
+	Balise model = (Balise)this.getModel();
+	if(balise == model) {
+		this.setVisible(false);
+		this.repaint();
+	}
+}
+```
+
+Le fait de ne pas détruire l'objet fait qu'il est ramasé à chaques fois que le bateau passe dessus, donc pour régler se petit problème nous avons rajouter un flag `pickedUp` dans la classe `Balise` qui indique si oui ou non la balise à déjà été ramassée.
