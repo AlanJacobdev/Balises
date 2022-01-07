@@ -1,13 +1,24 @@
-
-
-
 # Projet Balises et Satellites
 
 ## Constitution du groupe 
-
  - Lucas TANNÉ
  - Alan JACOB
 
+## Sommaire
+- [Projet Balises et Satellites](#projet-balises-et-satellites)
+	- [Constitution du groupe](#constitution-du-groupe)
+	- [Sommaire](#sommaire)
+	- [Correction du bogue](#correction-du-bogue)
+		- [Problème](#problème)
+		- [Correctif](#correctif)
+	- [Ajout et amélioration](#ajout-et-amélioration)
+		- [Deplacement sinusoïdale](#deplacement-sinusoïdale)
+		- [Echange de données](#echange-de-données)
+		- [Collecte de données](#collecte-de-données)
+		- [Barre de visualisation de données](#barre-de-visualisation-de-données)
+		- [Bateau de ramassage](#bateau-de-ramassage)
+			- [Contexte](#contexte)
+			- [Le ramassage](#le-ramassage)
 ## Correction du bogue
 
 ### Problème
