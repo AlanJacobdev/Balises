@@ -10,7 +10,7 @@
 
 ## Correction du bogue
 
-#### Problème
+### Problème
 
 Le problème constaté lors de l'éxécution du programme initial concernait la synchronisation d'une balise avec un satellite.
 
@@ -20,7 +20,7 @@ Au lieu de vider sa mémoire à la synchronisation pour ensuite retourner recolt
 
 Donc, si jamais la remontée était grande et/ou l'attente était longue, dès qu'un satellite passait, sa mémoire était possiblement de nouveau pleine, et ainsi, elle sauvegardait son dernier mouvement, la remontée pour se synchroniser. Elle restait ainsi bloquer à la surface.
 
-#### Correctif
+### Correctif
 
 Le vidage de mémoire se fait désormais lors de la synchronisation et la collecte des données ne s'effectue plus lors de la montée et la descente de la balise, et reprends lors de son déplacement normal (à la fin de la redescente *Redescendre.java).
 
@@ -76,7 +76,7 @@ public void tick() {
 ```
 ## Ajout et amélioration
 
-#### Deplacement sinusoïdale
+### Deplacement sinusoïdale
 
 Pour compléter l'ensemble de déplacement possible lors de collecte de données (horizontal et vertical), nous avons mis en place le déplacement sinusoïdales, permettant la collecte de données sur deux dimensions.
 
@@ -123,7 +123,7 @@ public void bouge(ElementMobile target) {
  
 ---
 
-#### Echange de données
+### Echange de données
 
 Lorsque la balise attends à la surface et qu'un satellite passe au dessus d'elle (dans un rayon de 10 unités), cette dernière lui trasnmet ses données avant de retourner à sa collecte dans les profondeurs.
 
@@ -155,7 +155,7 @@ Lorsque la mémoire d'un satellite se retrouve pleine, ce dernier ne permet plus
 
 ---
 
-#### Collecte de données
+### Collecte de données
 
 Ainsi, la collecte s'effectue maintenant seulement lors de son déplacement habituel.
 
@@ -167,7 +167,7 @@ Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et 
 
 ---
 
-#### Barre de visualisation de données
+### Barre de visualisation de données
 
 Une barre de visualisation de données est avant tout une classe Java `GrBarData` composer de 2 rectangles:
 
@@ -248,13 +248,13 @@ public void whenDataChanged(DataChanged arg) {
 
 ---
 
-#### Bateau de ramassage
+### Bateau de ramassage
 
 Le bateau d'étude vient ramasser les balises une fois que l'ensemble des stockages de données satellites soit remplis. Il ramasse les balises quand elle remonte à la surface pour ne pas perdre les données récupérer.
 
 <img src="https://c.tenor.com/dIYElE0kJHQAAAAd/wee-ship.gif" width="200">
 
-**Contexte**
+#### Contexte
 
 Le bateau de ramassage est comme une balise ou un satellite, il est constitué d'un model et d'une vue. Le bateau connait dès le départ combien de satellites sont dans le simulateur, il possède donc 3 propriétés:
 - `nbSatellite` : nombre de satellite présent dans la simulation.
@@ -295,7 +295,7 @@ public Satellite(int memorySize, Bateau bateau) {
 
 La distinction entre un satellite qui s'enregistre auprès du bateau et un satellite avec la mémoire saturé se fait dans l'évènement `SatelliteLife.java` simplement par le test `satellite.isFull()`.
 
-**Le ramassage**
+#### Le ramassage
 
 Comme indiqué dans l'introduction de ce chapitre le bateau de ramassage se déplace une fois que tous les satellites ne peuvent plus se synchroniser avec les balises.
 C'est donc dans la classe `Bateau`, lors de l'appel de la méthode `bouge()` appelé par le tick effectué par le manager, que le bateau check si tous les satellites enregistrés ont la mémoire pleine, ce n'est alors qu'à ce moment là qu'il va pouvoir se déplacer:
@@ -367,6 +367,17 @@ public void whenBalisePickedUp(BalisePickUp arg) {
 ```
 
 Le fait de ne pas détruire l'objet fait qu'il est ramasé à chaques fois que le bateau passe dessus, donc pour régler se petit problème nous avons rajouter un flag `pickedUp` dans la classe `Balise` qui indique si oui ou non la balise à déjà été ramassée.
+
+Pour finir un petit récapitulatif des possibilité rajouter avec le bateau:
+- Évènement du bateau qui enregistre les satellites et qui indique combien on la mémoire pleine.
+- Évènement qui indique quand le bateau se déplace.
+- Évènement qui effectue l'action du ramassage des balises.
+
+- La possibilité pour le bateau de bouger uniquement si tous les satellites ont leurs mémoires pleines.
+- La possibilité pour les balises de détecter si le bateau bouge.
+- La possibilité pour les balises de se mettre en état "ramassé" une fois toutes les conditions remplis 
+	(mémoire remplis, en attente de synchro et le bateau se trouve sur sa position)
+- La possibilité pour les balises de se cacher visuellement pour simuler leur ramassage par le bateau.
 
 Pour imagé tout ce chapitre, la démonstration ci-dessous montre comment les évènements fonctionnent visuellement:
 ![boat](https://user-images.githubusercontent.com/45236273/148539457-3ddde0a6-2f8c-4c63-8588-a1b2a777ffab.gif)
