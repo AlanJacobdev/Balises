@@ -24,8 +24,31 @@ Donc, si jamais la remontée était grande et/ou l'attente était longue, dès q
 
 Le vidage de mémoire se fait désormais lors de la synchronisation et la collecte des données ne s'effectue plus lors de la montée et la descente de la balise, et reprends lors de son déplacement normal.
 
+*DeplSynchronisation*
+```java
+	public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
+		if (this.synchro != null) return;
+		Satellite sat = (Satellite) arg.getSource();
+		int satX = sat.getPosition().x;
+		int tarX = target.getPosition().x;
+		if (satX > tarX - 10 && satX < tarX + 10) {
+			if(!sat.memoryFull()) {
+				this.synchro = sat;
+				
+				target.send(new SynchroEvent(this));
+				this.synchro.send(new SynchroEvent(this));
+				this.synchro.dataSize += target.dataSize();
+				this.synchro.send(new DataChanged(this.synchro));
+				target.resetData();
+			}else {
+				sat.setFull(true);
+			}
+		}
+	}
+```
 Un boolean permet de verifier si on est en phase de synchronisation ou non.
 
+*Balise.java*
 ```java
 public void tick() {
 		
@@ -46,7 +69,7 @@ public void tick() {
 		
 	}
 }
-
+```
 ## Ajout et amélioration
 
 #### Deplacement sinusoïdale
