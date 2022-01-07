@@ -22,7 +22,7 @@ Donc, si jamais la remontée était grande et/ou l'attente était longue, dès q
 
 #### Correctif
 
-Le vidage de mémoire se fait désormais lors de la synchronisation et la collecte des données ne s'effectue plus lors de la montée et la descente de la balise, et reprends lors de son déplacement normal.
+Le vidage de mémoire se fait désormais lors de la synchronisation et la collecte des données ne s'effectue plus lors de la montée et la descente de la balise, et reprends lors de son déplacement normal (à la fin de la redescente *Redescendre.java).
 
 *DeplSynchronisation*
 ```java
@@ -46,6 +46,10 @@ Le vidage de mémoire se fait désormais lors de la synchronisation et la collec
 		}
 	}
 ```
+
+
+
+
 Un boolean permet de verifier si on est en phase de synchronisation ou non.
 
 *Balise.java*
