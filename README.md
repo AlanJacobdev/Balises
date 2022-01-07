@@ -256,12 +256,12 @@ Le bateau d'étude vient ramasser les balises une fois que l'ensemble des stocka
 
 **Contexte**
 
-Le bateau de ramassage est comme une balise ou un satellite, il est constituer d'un model et d'une vue. L'idée sur cette objet c'est qu'il connais dès le départ combien de satellites sont dans le simulateur, il possède donc 3 propriétés:
+Le bateau de ramassage est comme une balise ou un satellite, il est constitué d'un model et d'une vue. Le bateau connait dès le départ combien de satellites sont dans le simulateur, il possède donc 3 propriétés:
 - `nbSatellite` : nombre de satellite présent dans la simulation.
-- `nbSatelliteFull` : nombre de satellite qui ont enregistrer le maximum de données provenant des balises.
+- `nbSatelliteFull` : nombre de satellite qui ont enregistré le maximum de données provenant des balises.
 - `eventSatellite` : un `EventHandler` qui permet de mettre à jour les précédentes propriétés. 
 
-L'enregistrement des satellite se font par un nouvel évènement `SatelliteLife`et `SatelliteLifeListener` implémenté par la vue du bateau `GrBateau` pour avoir accès aux deux méthodes `registerSatellite` et `satelliteFull`:
+L'enregistrement des satellites se font par un nouvel évènement `SatelliteLife`et `SatelliteLifeListener` implémenté par la vue du bateau `GrBateau` pour avoir accès aux deux méthodes `registerSatellite` et `satelliteFull`:
 
 *GrBateau.java*
 ```java
@@ -298,7 +298,7 @@ La distinction entre un satellite qui s'enregistre auprès du bateau et un satel
 **Le ramassage**
 
 Comme indiqué dans l'introduction de ce chapitre le bateau de ramassage se déplace une fois que tous les satellites ne peuvent plus se synchroniser avec les balises.
-C'est donc dans la classe `Bateau`, lors de l'appel de la méthode `bouge()` appelé du tick effectué par le manager, que le bateau check si tous les satellites enregistrer ont la mémoire pleine, ce n'est alors qu'à ce moment là qu'il va pouvoir se déplacer:
+C'est donc dans la classe `Bateau`, lors de l'appel de la méthode `bouge()` appelé par le tick effectué par le manager, que le bateau check si tous les satellites enregistrés ont la mémoire pleine, ce n'est alors qu'à ce moment là qu'il va pouvoir se déplacer:
 
 *Bateau.java*
 ```java
