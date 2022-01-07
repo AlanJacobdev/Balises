@@ -118,11 +118,11 @@ On peut constater graphiquement le remplissage ainsi que la synchronisation des 
 
 **Balises**
 
-![gif]
+![gif]()
 
 **Satellites**
 
-![gif]
+![gif]()
 
 ---
 
@@ -130,7 +130,7 @@ On peut constater graphiquement le remplissage ainsi que la synchronisation des 
 
 Le bateau d'étude vient ramasser les balises une fois que l'ensemble des stockages de données satellites soit remplis. Il ramasse les balises quand elle remonte à la surface pour ne pas perdre les données récupérer.
 
-![gif]https://tenor.com/view/wee-ship-cute-wave-funny-gif-16685307
+![gif](https://tenor.com/view/wee-ship-cute-wave-funny-gif-16685307)
 
 
 
