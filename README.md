@@ -367,3 +367,6 @@ public void whenBalisePickedUp(BalisePickUp arg) {
 ```
 
 Le fait de ne pas détruire l'objet fait qu'il est ramasé à chaques fois que le bateau passe dessus, donc pour régler se petit problème nous avons rajouter un flag `pickedUp` dans la classe `Balise` qui indique si oui ou non la balise à déjà été ramassée.
+
+Pour imagé tout ce chapitre, la démonstration ci-dessous montre comment les évènements fonctionnent visuellement:
+![boat](https://user-images.githubusercontent.com/45236273/148539457-3ddde0a6-2f8c-4c63-8588-a1b2a777ffab.gif)
