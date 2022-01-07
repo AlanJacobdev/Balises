@@ -80,7 +80,7 @@ public void tick() {
 
 Pour compléter l'ensemble de déplacement possible lors de collecte de données (horizontal et vertical), nous avons mis en place le déplacement sinusoïdales, permettant la collecte de données sur deux dimensions.
 
-Ainsi la classe DeplSinusoïdal comprends une fonction bouge : 
+*DeplSinusoïdal*
 ```java
 public void bouge(ElementMobile target) { 
 		Point p = target.getPosition(); 
@@ -129,6 +129,7 @@ Lorsque la balise attends à la surface et qu'un satellite passe au dessus d'ell
 
 Cet échange s'effectue au sein de la méthode whenSatelitteMoved de la classe DeplSynchronisation :
 
+*DeplSynchronisation*
 ```java
 public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 		if (this.synchro != null) return;
