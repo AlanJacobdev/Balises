@@ -96,7 +96,7 @@ public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 		}
 }
 ```
-
+![gif]()
 
 ***Echange impossible***
 
@@ -113,6 +113,8 @@ Ainsi, la collecte s'effectue maintenant seulement lors de son déplacement habi
 Un boolean est passé à vrai quand la mémoire de la balise est pleine, et devient faux quand cette dernière à fini sa descente.
 
 Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et d'accumuler des données à chaque unité de temps.
+
+![gif]()
 
 ---
 
