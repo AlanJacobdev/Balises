@@ -169,7 +169,42 @@ Lorsque le boolean est faux, il empeche de vérifier si la balise est pleine et 
 
 #### Barre de visualisation de données
 
-Les satellites ainsi que les balises possèdent une barre permettant de constater l'évolution de leur collecte de données.
+Une barre de visualisation de données est avant tout une classe Java `GrBarData` composer de 2 rectangles:
+```java
+public class GrBarData extends GrElementMobile {
+	
+	private static final long serialVersionUID = 1L;
+
+	private NiRectangle bar; 
+	private NiRectangle barBg;
+	
+	public GrBarData(GrEther ether, int width, int locationX, int locationY) {
+		super(ether);
+		barBg = new NiRectangle();
+		barBg.setBackground(Color.white);
+		barBg.setDimension(new Dimension(width, 10));
+		barBg.setLocation(locationX, locationY);
+		
+		bar = new NiRectangle();
+		bar.setDimension(new Dimension(0, 10));
+		barBg.add(bar);
+	}
+	
+	public void setBarColor(Color color) {
+		this.bar.setBackground(color);
+	}
+	
+	public NiRectangle getBarBg() {
+		return this.barBg;
+	}
+	
+	public void setSizeBar(int width) {
+		this.bar.setDimension(new Dimension(width/2, 10));
+		this.repaint();
+	}
+}
+```
+Les satellites ainsi que les balises possèdent une barre permettant de constater l'évolution de leur collecte de données. C'est pourquoi le constructeur est construit de façon à s'adapter pour les 2 objets.<br>
 On peut constater graphiquement le remplissage ainsi que la synchronisation des balises avec les satellites. Ceci permet de comprendre pourquoi des satellites n'accepte plus les synchronisation ou bien pourquoi les balises remontent.
 
 **Balises**
@@ -179,6 +214,34 @@ On peut constater graphiquement le remplissage ainsi que la synchronisation des 
 **Satellites**
 
 ![gif](satelliteBar.gif)
+
+Pour faire ces barres de données, nous avons créer un nouvel évènement `DataChanged` et `DataChangedListener` qui vont être propager au moment ou une balise récolte de la donnée:<br>
+*Balise.java*
+```java
+protected void readSensors() {
+	this.dataSize++;
+	this.send(new DataChanged(this));
+}
+```
+La classe `GrBalise` implémente donc l'interface `DataChangedListener` et sa méthode pour permettre de modifier graphiquement sa barre de données en lui envoyant sa taille calculer comme un pourcentage:<br>
+*GrBalise.java*
+```java
+@Override
+public void whenDataChanged(DataChanged arg) {
+	// TODO Auto-generated method stub
+	Balise balise = (Balise)arg.getSource();
+	if(balise.dataSize() == 0) {
+		this.db.setSizeBar(0);
+	}else {
+		BigDecimal dataSize = new BigDecimal(balise.dataSize());
+		BigDecimal memorySize = new BigDecimal(balise.memorySize());
+		BigDecimal res = (dataSize.divide(memorySize, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal(100));
+
+		this.db.setSizeBar(res.intValue());
+	}
+}
+```
+
 
 ---
 
