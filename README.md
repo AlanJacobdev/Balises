@@ -254,7 +254,7 @@ Le bateau d'étude vient ramasser les balises une fois que l'ensemble des stocka
 
 <img src="https://c.tenor.com/dIYElE0kJHQAAAAd/wee-ship.gif" width="200">
 
-##### Contexte
+**Contexte**
 
 Le bateau de ramassage est comme une balise ou un satellite, il est constituer d'un model et d'une vue. L'idée sur cette objet c'est qu'il connais dès le départ combien de satellites sont dans le simulateur, il possède donc 3 propriétés:
 - `nbSatellite` : nombre de satellite présent dans la simulation.
@@ -262,6 +262,7 @@ Le bateau de ramassage est comme une balise ou un satellite, il est constituer d
 - `eventSatellite` : un `EventHandler` qui permet de mettre à jour les précédentes propriétés. 
 
 L'enregistrement des satellite se font par un nouvel évènement `SatelliteLife`et `SatelliteLifeListener` implémenté par la vue du bateau `GrBateau` pour avoir accès aux deux méthodes `registerSatellite` et `satelliteFull`:
+
 *GrBateau.java*
 ```java
 @Override
@@ -280,6 +281,7 @@ public void satelliteFull(SatelliteLife arg) {
 ```
 
 Ainsi du côté du model du satellite, dans le constructeur, nous avons propager l'évènement `SatelliteLife`, pour ce faire nous sommes partis du principe que les satellites connaissent le bateau de ramassage dans leurs zone dès le départ :
+
 ```java
 public Satellite(int memorySize, Bateau bateau) {
 	super(memorySize);
@@ -293,10 +295,11 @@ public Satellite(int memorySize, Bateau bateau) {
 
 La distinction entre un satellite qui s'enregistre auprès du bateau et un satellite avec la mémoire saturé se fait dans l'évènement `SatelliteLife.java` simplement par le test `satellite.isFull()`.
 
-##### Le ramassage
+**Le ramassage**
 
 Comme indiqué dans l'introduction de ce chapitre le bateau de ramassage se déplace une fois que tous les satellites ne peuvent plus se synchroniser avec les balises.
 C'est donc dans la classe `Bateau`, lors de l'appel de la méthode `bouge()` appelé du tick effectué par le manager, que le bateau check si tous les satellites enregistrer ont la mémoire pleine, ce n'est alors qu'à ce moment là qu'il va pouvoir se déplacer:
+
 *Bateau.java*
 ```java
 public void bouge () {
