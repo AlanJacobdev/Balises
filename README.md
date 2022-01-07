@@ -70,6 +70,9 @@ public void bouge(ElementMobile target) {
 		target.setPosition(new Point(x, y)); 
 	}
  ```
+ 
+ ![gif]()
+ 
 ---
 
 #### Echange de données
@@ -98,6 +101,8 @@ public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 ***Echange impossible***
 
 Lorsque la mémoire d'un satellite se retrouve pleine, ce dernier ne permet plus la synchronisation avec une balise. Ainsi une balise cherchera à se synchroniser avec un autre satellite.
+
+![gif]()
 
 ---
 
