@@ -1,13 +1,24 @@
-
-
-
 # Projet Balises et Satellites
 
 ## Constitution du groupe 
-
  - Lucas TANNÉ
  - Alan JACOB
 
+## Sommaire
+- [Projet Balises et Satellites](#projet-balises-et-satellites)
+	- [Constitution du groupe](#constitution-du-groupe)
+	- [Sommaire](#sommaire)
+	- [Correction du bogue](#correction-du-bogue)
+		- [Problème](#problème)
+		- [Correctif](#correctif)
+	- [Ajout et amélioration](#ajout-et-amélioration)
+		- [Deplacement sinusoïdale](#deplacement-sinusoïdale)
+		- [Echange de données](#echange-de-données)
+		- [Collecte de données](#collecte-de-données)
+		- [Barre de visualisation de données](#barre-de-visualisation-de-données)
+		- [Bateau de ramassage](#bateau-de-ramassage)
+			- [Contexte](#contexte)
+			- [Le ramassage](#le-ramassage)
 ## Correction du bogue
 
 ### Problème
@@ -24,7 +35,7 @@ Donc, si jamais la remontée était grande et/ou l'attente était longue, dès q
 
 Le vidage de mémoire se fait désormais lors de la synchronisation et la collecte des données ne s'effectue plus lors de la montée et la descente de la balise, et reprends lors de son déplacement normal (à la fin de la redescente *Redescendre.java).
 
-*DeplSynchronisation*
+*DeplSynchronisation.java*
 ```java
 	public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 		if (this.synchro != null) return;
@@ -80,7 +91,7 @@ public void tick() {
 
 Pour compléter l'ensemble de déplacement possible lors de collecte de données (horizontal et vertical), nous avons mis en place le déplacement sinusoïdales, permettant la collecte de données sur deux dimensions.
 
-*DeplSinusoïdal*
+*DeplSinusoïdal.java*
 ```java
 public void bouge(ElementMobile target) { 
 		Point p = target.getPosition(); 
@@ -129,7 +140,7 @@ Lorsque la balise attends à la surface et qu'un satellite passe au dessus d'ell
 
 Cet échange s'effectue au sein de la méthode whenSatelitteMoved de la classe DeplSynchronisation :
 
-*DeplSynchronisation*
+*DeplSynchronisation.java*
 ```java
 public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 		if (this.synchro != null) return;
