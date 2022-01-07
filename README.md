@@ -145,7 +145,7 @@ public void whenSatelitteMoved(SatelliteMoved arg, Balise target) {
 		}
 }
 ```
-![gif]()
+![gif](sync.gif)
 
 ***Echange impossible***
 
